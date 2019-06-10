@@ -1,4 +1,10 @@
-config/*
+dist/
+config/
 config/dev.env
 config/prod.env
+prisma/docker-compose.yml
+prisma/prisma.yml
 .env
+.idea
+.graphqlconfig
+node_modules

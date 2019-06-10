@@ -1,0 +1,1043 @@
+type AggregateDialog {
+  count: Int!
+}
+
+type AggregateProject {
+  count: Int!
+}
+
+type AggregateTranslation {
+  count: Int!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+type BatchPayload {
+  count: Long!
+}
+
+type Dialog {
+  id: ID!
+  file: String!
+  speaker: String!
+  listener: String!
+  translation: Translation
+  project: Project!
+  contributors(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+}
+
+type DialogConnection {
+  pageInfo: PageInfo!
+  edges: [DialogEdge]!
+  aggregate: AggregateDialog!
+}
+
+input DialogCreateInput {
+  id: ID
+  file: String!
+  speaker: String!
+  listener: String!
+  translation: TranslationCreateOneWithoutDialogInput
+  project: ProjectCreateOneWithoutDialogsInput!
+  contributors: UserCreateManyWithoutDialogsInput
+}
+
+input DialogCreateManyWithoutContributorsInput {
+  create: [DialogCreateWithoutContributorsInput!]
+  connect: [DialogWhereUniqueInput!]
+}
+
+input DialogCreateManyWithoutProjectInput {
+  create: [DialogCreateWithoutProjectInput!]
+  connect: [DialogWhereUniqueInput!]
+}
+
+input DialogCreateOneWithoutTranslationInput {
+  create: DialogCreateWithoutTranslationInput
+  connect: DialogWhereUniqueInput
+}
+
+input DialogCreateWithoutContributorsInput {
+  id: ID
+  file: String!
+  speaker: String!
+  listener: String!
+  translation: TranslationCreateOneWithoutDialogInput
+  project: ProjectCreateOneWithoutDialogsInput!
+}
+
+input DialogCreateWithoutProjectInput {
+  id: ID
+  file: String!
+  speaker: String!
+  listener: String!
+  translation: TranslationCreateOneWithoutDialogInput
+  contributors: UserCreateManyWithoutDialogsInput
+}
+
+input DialogCreateWithoutTranslationInput {
+  id: ID
+  file: String!
+  speaker: String!
+  listener: String!
+  project: ProjectCreateOneWithoutDialogsInput!
+  contributors: UserCreateManyWithoutDialogsInput
+}
+
+type DialogEdge {
+  node: Dialog!
+  cursor: String!
+}
+
+enum DialogOrderByInput {
+  id_ASC
+  id_DESC
+  file_ASC
+  file_DESC
+  speaker_ASC
+  speaker_DESC
+  listener_ASC
+  listener_DESC
+}
+
+type DialogPreviousValues {
+  id: ID!
+  file: String!
+  speaker: String!
+  listener: String!
+}
+
+input DialogScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  file: String
+  file_not: String
+  file_in: [String!]
+  file_not_in: [String!]
+  file_lt: String
+  file_lte: String
+  file_gt: String
+  file_gte: String
+  file_contains: String
+  file_not_contains: String
+  file_starts_with: String
+  file_not_starts_with: String
+  file_ends_with: String
+  file_not_ends_with: String
+  speaker: String
+  speaker_not: String
+  speaker_in: [String!]
+  speaker_not_in: [String!]
+  speaker_lt: String
+  speaker_lte: String
+  speaker_gt: String
+  speaker_gte: String
+  speaker_contains: String
+  speaker_not_contains: String
+  speaker_starts_with: String
+  speaker_not_starts_with: String
+  speaker_ends_with: String
+  speaker_not_ends_with: String
+  listener: String
+  listener_not: String
+  listener_in: [String!]
+  listener_not_in: [String!]
+  listener_lt: String
+  listener_lte: String
+  listener_gt: String
+  listener_gte: String
+  listener_contains: String
+  listener_not_contains: String
+  listener_starts_with: String
+  listener_not_starts_with: String
+  listener_ends_with: String
+  listener_not_ends_with: String
+  AND: [DialogScalarWhereInput!]
+  OR: [DialogScalarWhereInput!]
+  NOT: [DialogScalarWhereInput!]
+}
+
+type DialogSubscriptionPayload {
+  mutation: MutationType!
+  node: Dialog
+  updatedFields: [String!]
+  previousValues: DialogPreviousValues
+}
+
+input DialogSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: DialogWhereInput
+  AND: [DialogSubscriptionWhereInput!]
+  OR: [DialogSubscriptionWhereInput!]
+  NOT: [DialogSubscriptionWhereInput!]
+}
+
+input DialogUpdateInput {
+  file: String
+  speaker: String
+  listener: String
+  translation: TranslationUpdateOneWithoutDialogInput
+  project: ProjectUpdateOneRequiredWithoutDialogsInput
+  contributors: UserUpdateManyWithoutDialogsInput
+}
+
+input DialogUpdateManyDataInput {
+  file: String
+  speaker: String
+  listener: String
+}
+
+input DialogUpdateManyMutationInput {
+  file: String
+  speaker: String
+  listener: String
+}
+
+input DialogUpdateManyWithoutContributorsInput {
+  create: [DialogCreateWithoutContributorsInput!]
+  delete: [DialogWhereUniqueInput!]
+  connect: [DialogWhereUniqueInput!]
+  set: [DialogWhereUniqueInput!]
+  disconnect: [DialogWhereUniqueInput!]
+  update: [DialogUpdateWithWhereUniqueWithoutContributorsInput!]
+  upsert: [DialogUpsertWithWhereUniqueWithoutContributorsInput!]
+  deleteMany: [DialogScalarWhereInput!]
+  updateMany: [DialogUpdateManyWithWhereNestedInput!]
+}
+
+input DialogUpdateManyWithoutProjectInput {
+  create: [DialogCreateWithoutProjectInput!]
+  delete: [DialogWhereUniqueInput!]
+  connect: [DialogWhereUniqueInput!]
+  set: [DialogWhereUniqueInput!]
+  disconnect: [DialogWhereUniqueInput!]
+  update: [DialogUpdateWithWhereUniqueWithoutProjectInput!]
+  upsert: [DialogUpsertWithWhereUniqueWithoutProjectInput!]
+  deleteMany: [DialogScalarWhereInput!]
+  updateMany: [DialogUpdateManyWithWhereNestedInput!]
+}
+
+input DialogUpdateManyWithWhereNestedInput {
+  where: DialogScalarWhereInput!
+  data: DialogUpdateManyDataInput!
+}
+
+input DialogUpdateOneRequiredWithoutTranslationInput {
+  create: DialogCreateWithoutTranslationInput
+  update: DialogUpdateWithoutTranslationDataInput
+  upsert: DialogUpsertWithoutTranslationInput
+  connect: DialogWhereUniqueInput
+}
+
+input DialogUpdateWithoutContributorsDataInput {
+  file: String
+  speaker: String
+  listener: String
+  translation: TranslationUpdateOneWithoutDialogInput
+  project: ProjectUpdateOneRequiredWithoutDialogsInput
+}
+
+input DialogUpdateWithoutProjectDataInput {
+  file: String
+  speaker: String
+  listener: String
+  translation: TranslationUpdateOneWithoutDialogInput
+  contributors: UserUpdateManyWithoutDialogsInput
+}
+
+input DialogUpdateWithoutTranslationDataInput {
+  file: String
+  speaker: String
+  listener: String
+  project: ProjectUpdateOneRequiredWithoutDialogsInput
+  contributors: UserUpdateManyWithoutDialogsInput
+}
+
+input DialogUpdateWithWhereUniqueWithoutContributorsInput {
+  where: DialogWhereUniqueInput!
+  data: DialogUpdateWithoutContributorsDataInput!
+}
+
+input DialogUpdateWithWhereUniqueWithoutProjectInput {
+  where: DialogWhereUniqueInput!
+  data: DialogUpdateWithoutProjectDataInput!
+}
+
+input DialogUpsertWithoutTranslationInput {
+  update: DialogUpdateWithoutTranslationDataInput!
+  create: DialogCreateWithoutTranslationInput!
+}
+
+input DialogUpsertWithWhereUniqueWithoutContributorsInput {
+  where: DialogWhereUniqueInput!
+  update: DialogUpdateWithoutContributorsDataInput!
+  create: DialogCreateWithoutContributorsInput!
+}
+
+input DialogUpsertWithWhereUniqueWithoutProjectInput {
+  where: DialogWhereUniqueInput!
+  update: DialogUpdateWithoutProjectDataInput!
+  create: DialogCreateWithoutProjectInput!
+}
+
+input DialogWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  file: String
+  file_not: String
+  file_in: [String!]
+  file_not_in: [String!]
+  file_lt: String
+  file_lte: String
+  file_gt: String
+  file_gte: String
+  file_contains: String
+  file_not_contains: String
+  file_starts_with: String
+  file_not_starts_with: String
+  file_ends_with: String
+  file_not_ends_with: String
+  speaker: String
+  speaker_not: String
+  speaker_in: [String!]
+  speaker_not_in: [String!]
+  speaker_lt: String
+  speaker_lte: String
+  speaker_gt: String
+  speaker_gte: String
+  speaker_contains: String
+  speaker_not_contains: String
+  speaker_starts_with: String
+  speaker_not_starts_with: String
+  speaker_ends_with: String
+  speaker_not_ends_with: String
+  listener: String
+  listener_not: String
+  listener_in: [String!]
+  listener_not_in: [String!]
+  listener_lt: String
+  listener_lte: String
+  listener_gt: String
+  listener_gte: String
+  listener_contains: String
+  listener_not_contains: String
+  listener_starts_with: String
+  listener_not_starts_with: String
+  listener_ends_with: String
+  listener_not_ends_with: String
+  translation: TranslationWhereInput
+  project: ProjectWhereInput
+  contributors_every: UserWhereInput
+  contributors_some: UserWhereInput
+  contributors_none: UserWhereInput
+  AND: [DialogWhereInput!]
+  OR: [DialogWhereInput!]
+  NOT: [DialogWhereInput!]
+}
+
+input DialogWhereUniqueInput {
+  id: ID
+  file: String
+}
+
+scalar Long
+
+type Mutation {
+  createDialog(data: DialogCreateInput!): Dialog!
+  updateDialog(data: DialogUpdateInput!, where: DialogWhereUniqueInput!): Dialog
+  updateManyDialogs(data: DialogUpdateManyMutationInput!, where: DialogWhereInput): BatchPayload!
+  upsertDialog(where: DialogWhereUniqueInput!, create: DialogCreateInput!, update: DialogUpdateInput!): Dialog!
+  deleteDialog(where: DialogWhereUniqueInput!): Dialog
+  deleteManyDialogs(where: DialogWhereInput): BatchPayload!
+  createProject(data: ProjectCreateInput!): Project!
+  updateProject(data: ProjectUpdateInput!, where: ProjectWhereUniqueInput!): Project
+  updateManyProjects(data: ProjectUpdateManyMutationInput!, where: ProjectWhereInput): BatchPayload!
+  upsertProject(where: ProjectWhereUniqueInput!, create: ProjectCreateInput!, update: ProjectUpdateInput!): Project!
+  deleteProject(where: ProjectWhereUniqueInput!): Project
+  deleteManyProjects(where: ProjectWhereInput): BatchPayload!
+  createTranslation(data: TranslationCreateInput!): Translation!
+  updateTranslation(data: TranslationUpdateInput!, where: TranslationWhereUniqueInput!): Translation
+  updateManyTranslations(data: TranslationUpdateManyMutationInput!, where: TranslationWhereInput): BatchPayload!
+  upsertTranslation(where: TranslationWhereUniqueInput!, create: TranslationCreateInput!, update: TranslationUpdateInput!): Translation!
+  deleteTranslation(where: TranslationWhereUniqueInput!): Translation
+  deleteManyTranslations(where: TranslationWhereInput): BatchPayload!
+  createUser(data: UserCreateInput!): User!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type Project {
+  id: ID!
+  name: String!
+  dialogs(where: DialogWhereInput, orderBy: DialogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Dialog!]
+}
+
+type ProjectConnection {
+  pageInfo: PageInfo!
+  edges: [ProjectEdge]!
+  aggregate: AggregateProject!
+}
+
+input ProjectCreateInput {
+  id: ID
+  name: String!
+  dialogs: DialogCreateManyWithoutProjectInput
+}
+
+input ProjectCreateOneWithoutDialogsInput {
+  create: ProjectCreateWithoutDialogsInput
+  connect: ProjectWhereUniqueInput
+}
+
+input ProjectCreateWithoutDialogsInput {
+  id: ID
+  name: String!
+}
+
+type ProjectEdge {
+  node: Project!
+  cursor: String!
+}
+
+enum ProjectOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+}
+
+type ProjectPreviousValues {
+  id: ID!
+  name: String!
+}
+
+type ProjectSubscriptionPayload {
+  mutation: MutationType!
+  node: Project
+  updatedFields: [String!]
+  previousValues: ProjectPreviousValues
+}
+
+input ProjectSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ProjectWhereInput
+  AND: [ProjectSubscriptionWhereInput!]
+  OR: [ProjectSubscriptionWhereInput!]
+  NOT: [ProjectSubscriptionWhereInput!]
+}
+
+input ProjectUpdateInput {
+  name: String
+  dialogs: DialogUpdateManyWithoutProjectInput
+}
+
+input ProjectUpdateManyMutationInput {
+  name: String
+}
+
+input ProjectUpdateOneRequiredWithoutDialogsInput {
+  create: ProjectCreateWithoutDialogsInput
+  update: ProjectUpdateWithoutDialogsDataInput
+  upsert: ProjectUpsertWithoutDialogsInput
+  connect: ProjectWhereUniqueInput
+}
+
+input ProjectUpdateWithoutDialogsDataInput {
+  name: String
+}
+
+input ProjectUpsertWithoutDialogsInput {
+  update: ProjectUpdateWithoutDialogsDataInput!
+  create: ProjectCreateWithoutDialogsInput!
+}
+
+input ProjectWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  dialogs_every: DialogWhereInput
+  dialogs_some: DialogWhereInput
+  dialogs_none: DialogWhereInput
+  AND: [ProjectWhereInput!]
+  OR: [ProjectWhereInput!]
+  NOT: [ProjectWhereInput!]
+}
+
+input ProjectWhereUniqueInput {
+  id: ID
+  name: String
+}
+
+type Query {
+  dialog(where: DialogWhereUniqueInput!): Dialog
+  dialogs(where: DialogWhereInput, orderBy: DialogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Dialog]!
+  dialogsConnection(where: DialogWhereInput, orderBy: DialogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DialogConnection!
+  project(where: ProjectWhereUniqueInput!): Project
+  projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project]!
+  projectsConnection(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProjectConnection!
+  translation(where: TranslationWhereUniqueInput!): Translation
+  translations(where: TranslationWhereInput, orderBy: TranslationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Translation]!
+  translationsConnection(where: TranslationWhereInput, orderBy: TranslationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TranslationConnection!
+  user(where: UserWhereUniqueInput!): User
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  node(id: ID!): Node
+}
+
+type Subscription {
+  dialog(where: DialogSubscriptionWhereInput): DialogSubscriptionPayload
+  project(where: ProjectSubscriptionWhereInput): ProjectSubscriptionPayload
+  translation(where: TranslationSubscriptionWhereInput): TranslationSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+}
+
+type Translation {
+  id: ID!
+  de: String
+  en: String
+  ru: String
+  pl: String
+  dialog: Dialog!
+}
+
+type TranslationConnection {
+  pageInfo: PageInfo!
+  edges: [TranslationEdge]!
+  aggregate: AggregateTranslation!
+}
+
+input TranslationCreateInput {
+  id: ID
+  de: String
+  en: String
+  ru: String
+  pl: String
+  dialog: DialogCreateOneWithoutTranslationInput!
+}
+
+input TranslationCreateOneWithoutDialogInput {
+  create: TranslationCreateWithoutDialogInput
+  connect: TranslationWhereUniqueInput
+}
+
+input TranslationCreateWithoutDialogInput {
+  id: ID
+  de: String
+  en: String
+  ru: String
+  pl: String
+}
+
+type TranslationEdge {
+  node: Translation!
+  cursor: String!
+}
+
+enum TranslationOrderByInput {
+  id_ASC
+  id_DESC
+  de_ASC
+  de_DESC
+  en_ASC
+  en_DESC
+  ru_ASC
+  ru_DESC
+  pl_ASC
+  pl_DESC
+}
+
+type TranslationPreviousValues {
+  id: ID!
+  de: String
+  en: String
+  ru: String
+  pl: String
+}
+
+type TranslationSubscriptionPayload {
+  mutation: MutationType!
+  node: Translation
+  updatedFields: [String!]
+  previousValues: TranslationPreviousValues
+}
+
+input TranslationSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: TranslationWhereInput
+  AND: [TranslationSubscriptionWhereInput!]
+  OR: [TranslationSubscriptionWhereInput!]
+  NOT: [TranslationSubscriptionWhereInput!]
+}
+
+input TranslationUpdateInput {
+  de: String
+  en: String
+  ru: String
+  pl: String
+  dialog: DialogUpdateOneRequiredWithoutTranslationInput
+}
+
+input TranslationUpdateManyMutationInput {
+  de: String
+  en: String
+  ru: String
+  pl: String
+}
+
+input TranslationUpdateOneWithoutDialogInput {
+  create: TranslationCreateWithoutDialogInput
+  update: TranslationUpdateWithoutDialogDataInput
+  upsert: TranslationUpsertWithoutDialogInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: TranslationWhereUniqueInput
+}
+
+input TranslationUpdateWithoutDialogDataInput {
+  de: String
+  en: String
+  ru: String
+  pl: String
+}
+
+input TranslationUpsertWithoutDialogInput {
+  update: TranslationUpdateWithoutDialogDataInput!
+  create: TranslationCreateWithoutDialogInput!
+}
+
+input TranslationWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  de: String
+  de_not: String
+  de_in: [String!]
+  de_not_in: [String!]
+  de_lt: String
+  de_lte: String
+  de_gt: String
+  de_gte: String
+  de_contains: String
+  de_not_contains: String
+  de_starts_with: String
+  de_not_starts_with: String
+  de_ends_with: String
+  de_not_ends_with: String
+  en: String
+  en_not: String
+  en_in: [String!]
+  en_not_in: [String!]
+  en_lt: String
+  en_lte: String
+  en_gt: String
+  en_gte: String
+  en_contains: String
+  en_not_contains: String
+  en_starts_with: String
+  en_not_starts_with: String
+  en_ends_with: String
+  en_not_ends_with: String
+  ru: String
+  ru_not: String
+  ru_in: [String!]
+  ru_not_in: [String!]
+  ru_lt: String
+  ru_lte: String
+  ru_gt: String
+  ru_gte: String
+  ru_contains: String
+  ru_not_contains: String
+  ru_starts_with: String
+  ru_not_starts_with: String
+  ru_ends_with: String
+  ru_not_ends_with: String
+  pl: String
+  pl_not: String
+  pl_in: [String!]
+  pl_not_in: [String!]
+  pl_lt: String
+  pl_lte: String
+  pl_gt: String
+  pl_gte: String
+  pl_contains: String
+  pl_not_contains: String
+  pl_starts_with: String
+  pl_not_starts_with: String
+  pl_ends_with: String
+  pl_not_ends_with: String
+  dialog: DialogWhereInput
+  AND: [TranslationWhereInput!]
+  OR: [TranslationWhereInput!]
+  NOT: [TranslationWhereInput!]
+}
+
+input TranslationWhereUniqueInput {
+  id: ID
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+  permissions: [String!]!
+  dialogs(where: DialogWhereInput, orderBy: DialogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Dialog!]
+}
+
+type UserConnection {
+  pageInfo: PageInfo!
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  id: ID
+  name: String!
+  email: String!
+  password: String!
+  permissions: UserCreatepermissionsInput
+  dialogs: DialogCreateManyWithoutContributorsInput
+}
+
+input UserCreateManyWithoutDialogsInput {
+  create: [UserCreateWithoutDialogsInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreatepermissionsInput {
+  set: [String!]
+}
+
+input UserCreateWithoutDialogsInput {
+  id: ID
+  name: String!
+  email: String!
+  password: String!
+  permissions: UserCreatepermissionsInput
+}
+
+type UserEdge {
+  node: User!
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  email_ASC
+  email_DESC
+  password_ASC
+  password_DESC
+}
+
+type UserPreviousValues {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+  permissions: [String!]!
+}
+
+input UserScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  AND: [UserScalarWhereInput!]
+  OR: [UserScalarWhereInput!]
+  NOT: [UserScalarWhereInput!]
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+  AND: [UserSubscriptionWhereInput!]
+  OR: [UserSubscriptionWhereInput!]
+  NOT: [UserSubscriptionWhereInput!]
+}
+
+input UserUpdateInput {
+  name: String
+  email: String
+  password: String
+  permissions: UserUpdatepermissionsInput
+  dialogs: DialogUpdateManyWithoutContributorsInput
+}
+
+input UserUpdateManyDataInput {
+  name: String
+  email: String
+  password: String
+  permissions: UserUpdatepermissionsInput
+}
+
+input UserUpdateManyMutationInput {
+  name: String
+  email: String
+  password: String
+  permissions: UserUpdatepermissionsInput
+}
+
+input UserUpdateManyWithoutDialogsInput {
+  create: [UserCreateWithoutDialogsInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutDialogsInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutDialogsInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+}
+
+input UserUpdateManyWithWhereNestedInput {
+  where: UserScalarWhereInput!
+  data: UserUpdateManyDataInput!
+}
+
+input UserUpdatepermissionsInput {
+  set: [String!]
+}
+
+input UserUpdateWithoutDialogsDataInput {
+  name: String
+  email: String
+  password: String
+  permissions: UserUpdatepermissionsInput
+}
+
+input UserUpdateWithWhereUniqueWithoutDialogsInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutDialogsDataInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutDialogsInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutDialogsDataInput!
+  create: UserCreateWithoutDialogsInput!
+}
+
+input UserWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  dialogs_every: DialogWhereInput
+  dialogs_some: DialogWhereInput
+  dialogs_none: DialogWhereInput
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+}
+
+input UserWhereUniqueInput {
+  id: ID
+  email: String
+}

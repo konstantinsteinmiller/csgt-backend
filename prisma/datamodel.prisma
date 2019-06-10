@@ -1,0 +1,33 @@
+type Project {
+  id: ID! @id
+  name: String! @unique
+  dialogs: [Dialog!]! @relation(name:"DialogToProject", onDelete: CASCADE)
+}
+
+type User {
+  id: ID! @id
+  name: String!
+  email: String! @unique
+  password: String!
+  permissions: [String!]! @scalarList(strategy: RELATION)
+  dialogs: [Dialog!]! @relation(name:"DialogToUser", onDelete: SET_NULL)
+}
+
+type Dialog {
+  id: ID! @id
+  file: String! @unique
+  speaker: String!
+  listener: String!
+  translation: Translation @relation(name:"TranslationToDialog", onDelete: CASCADE, link: INLINE)
+  project: Project! @relation(name:"DialogToProject", onDelete: SET_NULL)
+  contributors: [User!]! @relation(name:"DialogToUser", onDelete: SET_NULL)
+}
+
+type Translation {
+  id: ID! @id
+  de: String
+  en: String
+  ru: String
+  pl: String
+  dialog: Dialog! @relation(name:"TranslationToDialog", onDelete: CASCADE)
+}

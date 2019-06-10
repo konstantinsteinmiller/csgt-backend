@@ -1,0 +1,142 @@
+# import ProjectOrderByInput from "./generated/prisma.graphql"
+
+type Query {
+  projects(query: String, first: Int, skip: Int, after: Int, orderBy: ProjectOrderByInput): [Project!]!
+  users(query: String, first: Int, skip: Int, after: Int): [User!]!
+  dialogs(query: String, first: Int, skip: Int, after: Int): [Dialog!]!
+  translations(query: String, first: Int, skip: Int, after: Int): [Translation!]!
+  user(id: ID!): User
+}
+
+type Mutation {
+  login(data: LoginUserInput!): AuthPayload!
+  createProject(data: CreateProjectInput!): Project!
+  deleteProject(id: ID!): Project!
+  updateProject(id: ID!, data: UpdateProjectInput): Project!
+  createUser(data: CreateUserInput!): AuthPayload!
+  deleteUser: User!
+  updateUser(data: UpdateUserInput): User!
+  createDialog(data: CreateDialogInput): Dialog!
+  deleteDialog(id: ID!): Dialog!
+  updateDialog(id: ID!, data: UpdateDialogInput): Dialog!
+  updateTranslation(id: ID!, data: UpdateTranslationInput): Translation!
+}
+
+type Subscription {
+  dialog(userId: ID): DialogSubscriptionPayload!
+  user: UserSubscriptionPayload!
+  translation: TranslationSubscriptionPayload!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+input LoginUserInput {
+  email: String!
+  password: String!
+}
+
+input CreateProjectInput {
+  name: String!
+}
+
+input UpdateProjectInput {
+  name: String
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+  permissions: [String!]
+}
+
+input UpdateUserInput {
+  name: String
+  email: String
+  password: String
+}
+
+input CreateDialogInput {
+  file: String!
+  speaker: String!
+  listener: String!
+  translation: CreateTranslationInput!
+  project: String!
+}
+
+input UpdateDialogInput {
+  file: String
+  speaker: String
+  listener: String
+  project: String
+}
+
+input CreateTranslationInput {
+  de: String
+  en: String
+  ru: String
+  pl: String
+}
+
+input UpdateTranslationInput {
+  de: String
+  en: String
+  ru: String
+  pl: String
+}
+
+type Project {
+  id: ID!
+  name: String!
+  dialogs: [Dialog!]
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String
+  password: String
+  dialogs: [Dialog!]
+}
+
+type Dialog {
+  id: ID!
+  file: String!
+  speaker: String!
+  listener: String!
+  translation: Translation
+  project: Project!
+  contributors: [User!]
+}
+
+type Translation {
+  id: ID!
+  de: String
+  en: String
+  ru: String
+  pl: String
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+type DialogSubscriptionPayload {
+  mutation: MutationType!
+  node: Dialog
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+}
+
+type TranslationSubscriptionPayload {
+  mutation: MutationType!
+  node: Translation
+}
