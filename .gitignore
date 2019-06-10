@@ -1,2 +1,4 @@
-./config/*
-./.env
+config/*
+config/dev.env
+config/prod.env
+.env
