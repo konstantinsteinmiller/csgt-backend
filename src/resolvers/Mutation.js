@@ -41,7 +41,6 @@ const Mutation = {
   async createUser(parent, { data }, { prisma, request }) {
     getUserId(request)
     const password = await hashPassword(data.password)
-    console.log('password: ', password) // eslint-disable-line
     const user = await prisma.mutation.createUser({
       data: { ...data, password }
     })
