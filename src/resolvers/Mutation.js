@@ -3,7 +3,6 @@ import getUserId from '../utils/getUserId'
 import generateToken from '../utils/generateToken'
 import hashPassword from '../utils/hashPassword'
 import checkPermissions from '../utils/checkPermissions'
-import enums from '../utils/enums'
 
 const Mutation = {
   async login(parent, { data }, { prisma }) {
