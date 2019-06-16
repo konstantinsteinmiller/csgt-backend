@@ -6,9 +6,16 @@
   "scripts": {
     "start": "node dist/index.js",
     "heroku-postbuild": "babel src --out-dir dist --copy-files",
+    "prod": "./node_modules/.bin/env-cmd -f ./config/prod.env node dist/index.js",
     "dev": "./node_modules/.bin/env-cmd -f ./config/dev.env nodemon src/index.js --ext js,graphql --exec babel-node",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/.bin/env-cmd -f ./config/test.env jest --watch",
     "get-schema": "graphql get-schema -p prisma --dotenv config/dev.env"
+  },
+  "jest": {
+    "verbose": true,
+    "preset": "./node_modules/babel-preset-jest/index.js",
+    "globalSetup": "./tests/jest/globalSetup.js",
+    "globalTeardown": "./tests/jest/globalTeardown.js"
   },
   "engines": {
     "node": ">=12.2.0"
@@ -17,8 +24,10 @@
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.4.0",
+    "@babel/preset-env": "^7.4.5",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.0.0",
     "env-cmd": "^9.0.3",
@@ -29,6 +38,7 @@
   "devDependencies": {
     "babel-eslint": "^10.0.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-jest": "^24.6.0",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.3.0",
     "eslint-import-resolver-alias": "^1.1.2",
@@ -36,6 +46,7 @@
     "eslint-plugin-node": "^9.1.0",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-promise": "^4.1.1",
+    "jest": "^24.8.0",
     "prettier": "^1.18.2",
     "stylelint": "^10.1.0",
     "stylelint-config-sass-guidelines": "^6.0.0",

@@ -1,6 +1,3 @@
-# source: http://192.168.99.100:4466/csgt
-# timestamp: Tue Jun 11 2019 21:14:23 GMT+0200 (GMT+02:00)
-
 type AggregateDialog {
   count: Int!
 }
@@ -18,11 +15,10 @@ type AggregateUser {
 }
 
 type BatchPayload {
-  """The number of nodes that have been affected by the Batch operation."""
   count: Long!
 }
 
-type Dialog implements Node {
+type Dialog {
   id: ID!
   file: String!
   speaker: String!
@@ -32,12 +28,8 @@ type Dialog implements Node {
   contributors(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
 }
 
-"""A connection to a list of items."""
 type DialogConnection {
-  """Information to aid in pagination."""
   pageInfo: PageInfo!
-
-  """A list of edges."""
   edges: [DialogEdge]!
   aggregate: AggregateDialog!
 }
@@ -94,12 +86,8 @@ input DialogCreateWithoutTranslationInput {
   contributors: UserCreateManyWithoutDialogsInput
 }
 
-"""An edge in a connection."""
 type DialogEdge {
-  """The item at the end of the edge."""
   node: Dialog!
-
-  """A cursor for use in pagination."""
   cursor: String!
 }
 
@@ -122,174 +110,65 @@ type DialogPreviousValues {
 }
 
 input DialogScalarWhereInput {
-  """Logical AND on all given filters."""
-  AND: [DialogScalarWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [DialogScalarWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [DialogScalarWhereInput!]
   id: ID
-
-  """All values that are not equal to given value."""
   id_not: ID
-
-  """All values that are contained in given list."""
   id_in: [ID!]
-
-  """All values that are not contained in given list."""
   id_not_in: [ID!]
-
-  """All values less than the given value."""
   id_lt: ID
-
-  """All values less than or equal the given value."""
   id_lte: ID
-
-  """All values greater than the given value."""
   id_gt: ID
-
-  """All values greater than or equal the given value."""
   id_gte: ID
-
-  """All values containing the given string."""
   id_contains: ID
-
-  """All values not containing the given string."""
   id_not_contains: ID
-
-  """All values starting with the given string."""
   id_starts_with: ID
-
-  """All values not starting with the given string."""
   id_not_starts_with: ID
-
-  """All values ending with the given string."""
   id_ends_with: ID
-
-  """All values not ending with the given string."""
   id_not_ends_with: ID
   file: String
-
-  """All values that are not equal to given value."""
   file_not: String
-
-  """All values that are contained in given list."""
   file_in: [String!]
-
-  """All values that are not contained in given list."""
   file_not_in: [String!]
-
-  """All values less than the given value."""
   file_lt: String
-
-  """All values less than or equal the given value."""
   file_lte: String
-
-  """All values greater than the given value."""
   file_gt: String
-
-  """All values greater than or equal the given value."""
   file_gte: String
-
-  """All values containing the given string."""
   file_contains: String
-
-  """All values not containing the given string."""
   file_not_contains: String
-
-  """All values starting with the given string."""
   file_starts_with: String
-
-  """All values not starting with the given string."""
   file_not_starts_with: String
-
-  """All values ending with the given string."""
   file_ends_with: String
-
-  """All values not ending with the given string."""
   file_not_ends_with: String
   speaker: String
-
-  """All values that are not equal to given value."""
   speaker_not: String
-
-  """All values that are contained in given list."""
   speaker_in: [String!]
-
-  """All values that are not contained in given list."""
   speaker_not_in: [String!]
-
-  """All values less than the given value."""
   speaker_lt: String
-
-  """All values less than or equal the given value."""
   speaker_lte: String
-
-  """All values greater than the given value."""
   speaker_gt: String
-
-  """All values greater than or equal the given value."""
   speaker_gte: String
-
-  """All values containing the given string."""
   speaker_contains: String
-
-  """All values not containing the given string."""
   speaker_not_contains: String
-
-  """All values starting with the given string."""
   speaker_starts_with: String
-
-  """All values not starting with the given string."""
   speaker_not_starts_with: String
-
-  """All values ending with the given string."""
   speaker_ends_with: String
-
-  """All values not ending with the given string."""
   speaker_not_ends_with: String
   listener: String
-
-  """All values that are not equal to given value."""
   listener_not: String
-
-  """All values that are contained in given list."""
   listener_in: [String!]
-
-  """All values that are not contained in given list."""
   listener_not_in: [String!]
-
-  """All values less than the given value."""
   listener_lt: String
-
-  """All values less than or equal the given value."""
   listener_lte: String
-
-  """All values greater than the given value."""
   listener_gt: String
-
-  """All values greater than or equal the given value."""
   listener_gte: String
-
-  """All values containing the given string."""
   listener_contains: String
-
-  """All values not containing the given string."""
   listener_not_contains: String
-
-  """All values starting with the given string."""
   listener_starts_with: String
-
-  """All values not starting with the given string."""
   listener_not_starts_with: String
-
-  """All values ending with the given string."""
   listener_ends_with: String
-
-  """All values not ending with the given string."""
   listener_not_ends_with: String
+  AND: [DialogScalarWhereInput!]
+  OR: [DialogScalarWhereInput!]
+  NOT: [DialogScalarWhereInput!]
 }
 
 type DialogSubscriptionPayload {
@@ -300,33 +179,14 @@ type DialogSubscriptionPayload {
 }
 
 input DialogSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [DialogSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [DialogSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [DialogSubscriptionWhereInput!]
-
-  """The subscription event gets dispatched when it's listed in mutation_in"""
   mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
   updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
   updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
   updatedFields_contains_some: [String!]
   node: DialogWhereInput
+  AND: [DialogSubscriptionWhereInput!]
+  OR: [DialogSubscriptionWhereInput!]
+  NOT: [DialogSubscriptionWhereInput!]
 }
 
 input DialogUpdateInput {
@@ -352,26 +212,26 @@ input DialogUpdateManyMutationInput {
 
 input DialogUpdateManyWithoutContributorsInput {
   create: [DialogCreateWithoutContributorsInput!]
+  delete: [DialogWhereUniqueInput!]
   connect: [DialogWhereUniqueInput!]
   set: [DialogWhereUniqueInput!]
   disconnect: [DialogWhereUniqueInput!]
-  delete: [DialogWhereUniqueInput!]
   update: [DialogUpdateWithWhereUniqueWithoutContributorsInput!]
-  updateMany: [DialogUpdateManyWithWhereNestedInput!]
-  deleteMany: [DialogScalarWhereInput!]
   upsert: [DialogUpsertWithWhereUniqueWithoutContributorsInput!]
+  deleteMany: [DialogScalarWhereInput!]
+  updateMany: [DialogUpdateManyWithWhereNestedInput!]
 }
 
 input DialogUpdateManyWithoutProjectInput {
   create: [DialogCreateWithoutProjectInput!]
+  delete: [DialogWhereUniqueInput!]
   connect: [DialogWhereUniqueInput!]
   set: [DialogWhereUniqueInput!]
   disconnect: [DialogWhereUniqueInput!]
-  delete: [DialogWhereUniqueInput!]
   update: [DialogUpdateWithWhereUniqueWithoutProjectInput!]
-  updateMany: [DialogUpdateManyWithWhereNestedInput!]
-  deleteMany: [DialogScalarWhereInput!]
   upsert: [DialogUpsertWithWhereUniqueWithoutProjectInput!]
+  deleteMany: [DialogScalarWhereInput!]
+  updateMany: [DialogUpdateManyWithWhereNestedInput!]
 }
 
 input DialogUpdateManyWithWhereNestedInput {
@@ -381,9 +241,9 @@ input DialogUpdateManyWithWhereNestedInput {
 
 input DialogUpdateOneRequiredWithoutTranslationInput {
   create: DialogCreateWithoutTranslationInput
-  connect: DialogWhereUniqueInput
   update: DialogUpdateWithoutTranslationDataInput
   upsert: DialogUpsertWithoutTranslationInput
+  connect: DialogWhereUniqueInput
 }
 
 input DialogUpdateWithoutContributorsDataInput {
@@ -438,179 +298,70 @@ input DialogUpsertWithWhereUniqueWithoutProjectInput {
 }
 
 input DialogWhereInput {
-  """Logical AND on all given filters."""
-  AND: [DialogWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [DialogWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [DialogWhereInput!]
   id: ID
-
-  """All values that are not equal to given value."""
   id_not: ID
-
-  """All values that are contained in given list."""
   id_in: [ID!]
-
-  """All values that are not contained in given list."""
   id_not_in: [ID!]
-
-  """All values less than the given value."""
   id_lt: ID
-
-  """All values less than or equal the given value."""
   id_lte: ID
-
-  """All values greater than the given value."""
   id_gt: ID
-
-  """All values greater than or equal the given value."""
   id_gte: ID
-
-  """All values containing the given string."""
   id_contains: ID
-
-  """All values not containing the given string."""
   id_not_contains: ID
-
-  """All values starting with the given string."""
   id_starts_with: ID
-
-  """All values not starting with the given string."""
   id_not_starts_with: ID
-
-  """All values ending with the given string."""
   id_ends_with: ID
-
-  """All values not ending with the given string."""
   id_not_ends_with: ID
   file: String
-
-  """All values that are not equal to given value."""
   file_not: String
-
-  """All values that are contained in given list."""
   file_in: [String!]
-
-  """All values that are not contained in given list."""
   file_not_in: [String!]
-
-  """All values less than the given value."""
   file_lt: String
-
-  """All values less than or equal the given value."""
   file_lte: String
-
-  """All values greater than the given value."""
   file_gt: String
-
-  """All values greater than or equal the given value."""
   file_gte: String
-
-  """All values containing the given string."""
   file_contains: String
-
-  """All values not containing the given string."""
   file_not_contains: String
-
-  """All values starting with the given string."""
   file_starts_with: String
-
-  """All values not starting with the given string."""
   file_not_starts_with: String
-
-  """All values ending with the given string."""
   file_ends_with: String
-
-  """All values not ending with the given string."""
   file_not_ends_with: String
   speaker: String
-
-  """All values that are not equal to given value."""
   speaker_not: String
-
-  """All values that are contained in given list."""
   speaker_in: [String!]
-
-  """All values that are not contained in given list."""
   speaker_not_in: [String!]
-
-  """All values less than the given value."""
   speaker_lt: String
-
-  """All values less than or equal the given value."""
   speaker_lte: String
-
-  """All values greater than the given value."""
   speaker_gt: String
-
-  """All values greater than or equal the given value."""
   speaker_gte: String
-
-  """All values containing the given string."""
   speaker_contains: String
-
-  """All values not containing the given string."""
   speaker_not_contains: String
-
-  """All values starting with the given string."""
   speaker_starts_with: String
-
-  """All values not starting with the given string."""
   speaker_not_starts_with: String
-
-  """All values ending with the given string."""
   speaker_ends_with: String
-
-  """All values not ending with the given string."""
   speaker_not_ends_with: String
   listener: String
-
-  """All values that are not equal to given value."""
   listener_not: String
-
-  """All values that are contained in given list."""
   listener_in: [String!]
-
-  """All values that are not contained in given list."""
   listener_not_in: [String!]
-
-  """All values less than the given value."""
   listener_lt: String
-
-  """All values less than or equal the given value."""
   listener_lte: String
-
-  """All values greater than the given value."""
   listener_gt: String
-
-  """All values greater than or equal the given value."""
   listener_gte: String
-
-  """All values containing the given string."""
   listener_contains: String
-
-  """All values not containing the given string."""
   listener_not_contains: String
-
-  """All values starting with the given string."""
   listener_starts_with: String
-
-  """All values not starting with the given string."""
   listener_not_starts_with: String
-
-  """All values ending with the given string."""
   listener_ends_with: String
-
-  """All values not ending with the given string."""
   listener_not_ends_with: String
   translation: TranslationWhereInput
   project: ProjectWhereInput
   contributors_every: UserWhereInput
   contributors_some: UserWhereInput
   contributors_none: UserWhereInput
+  AND: [DialogWhereInput!]
+  OR: [DialogWhereInput!]
+  NOT: [DialogWhereInput!]
 }
 
 input DialogWhereUniqueInput {
@@ -618,41 +369,33 @@ input DialogWhereUniqueInput {
   file: String
 }
 
-"""Raw JSON value"""
-scalar Json
-
-"""
-The `Long` scalar type represents non-fractional signed whole numeric values.
-Long can represent values between -(2^63) and 2^63 - 1.
-"""
 scalar Long
 
 type Mutation {
-  createProject(data: ProjectCreateInput!): Project!
-  createUser(data: UserCreateInput!): User!
   createDialog(data: DialogCreateInput!): Dialog!
-  createTranslation(data: TranslationCreateInput!): Translation!
-  updateProject(data: ProjectUpdateInput!, where: ProjectWhereUniqueInput!): Project
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateDialog(data: DialogUpdateInput!, where: DialogWhereUniqueInput!): Dialog
-  updateTranslation(data: TranslationUpdateInput!, where: TranslationWhereUniqueInput!): Translation
-  deleteProject(where: ProjectWhereUniqueInput!): Project
-  deleteUser(where: UserWhereUniqueInput!): User
-  deleteDialog(where: DialogWhereUniqueInput!): Dialog
-  deleteTranslation(where: TranslationWhereUniqueInput!): Translation
-  upsertProject(where: ProjectWhereUniqueInput!, create: ProjectCreateInput!, update: ProjectUpdateInput!): Project!
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  upsertDialog(where: DialogWhereUniqueInput!, create: DialogCreateInput!, update: DialogUpdateInput!): Dialog!
-  upsertTranslation(where: TranslationWhereUniqueInput!, create: TranslationCreateInput!, update: TranslationUpdateInput!): Translation!
-  updateManyProjects(data: ProjectUpdateManyMutationInput!, where: ProjectWhereInput): BatchPayload!
-  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyDialogs(data: DialogUpdateManyMutationInput!, where: DialogWhereInput): BatchPayload!
-  updateManyTranslations(data: TranslationUpdateManyMutationInput!, where: TranslationWhereInput): BatchPayload!
-  deleteManyProjects(where: ProjectWhereInput): BatchPayload!
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  upsertDialog(where: DialogWhereUniqueInput!, create: DialogCreateInput!, update: DialogUpdateInput!): Dialog!
+  deleteDialog(where: DialogWhereUniqueInput!): Dialog
   deleteManyDialogs(where: DialogWhereInput): BatchPayload!
+  createProject(data: ProjectCreateInput!): Project!
+  updateProject(data: ProjectUpdateInput!, where: ProjectWhereUniqueInput!): Project
+  updateManyProjects(data: ProjectUpdateManyMutationInput!, where: ProjectWhereInput): BatchPayload!
+  upsertProject(where: ProjectWhereUniqueInput!, create: ProjectCreateInput!, update: ProjectUpdateInput!): Project!
+  deleteProject(where: ProjectWhereUniqueInput!): Project
+  deleteManyProjects(where: ProjectWhereInput): BatchPayload!
+  createTranslation(data: TranslationCreateInput!): Translation!
+  updateTranslation(data: TranslationUpdateInput!, where: TranslationWhereUniqueInput!): Translation
+  updateManyTranslations(data: TranslationUpdateManyMutationInput!, where: TranslationWhereInput): BatchPayload!
+  upsertTranslation(where: TranslationWhereUniqueInput!, create: TranslationCreateInput!, update: TranslationUpdateInput!): Translation!
+  deleteTranslation(where: TranslationWhereUniqueInput!): Translation
   deleteManyTranslations(where: TranslationWhereInput): BatchPayload!
-  executeRaw(database: PrismaDatabase, query: String!): Json!
+  createUser(data: UserCreateInput!): User!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -661,43 +404,25 @@ enum MutationType {
   DELETED
 }
 
-"""An object with an ID"""
 interface Node {
-  """The id of the object."""
   id: ID!
 }
 
-"""Information about pagination in a connection."""
 type PageInfo {
-  """When paginating forwards, are there more items?"""
   hasNextPage: Boolean!
-
-  """When paginating backwards, are there more items?"""
   hasPreviousPage: Boolean!
-
-  """When paginating backwards, the cursor to continue."""
   startCursor: String
-
-  """When paginating forwards, the cursor to continue."""
   endCursor: String
 }
 
-enum PrismaDatabase {
-  default
-}
-
-type Project implements Node {
+type Project {
   id: ID!
   name: String!
   dialogs(where: DialogWhereInput, orderBy: DialogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Dialog!]
 }
 
-"""A connection to a list of items."""
 type ProjectConnection {
-  """Information to aid in pagination."""
   pageInfo: PageInfo!
-
-  """A list of edges."""
   edges: [ProjectEdge]!
   aggregate: AggregateProject!
 }
@@ -718,12 +443,8 @@ input ProjectCreateWithoutDialogsInput {
   name: String!
 }
 
-"""An edge in a connection."""
 type ProjectEdge {
-  """The item at the end of the edge."""
   node: Project!
-
-  """A cursor for use in pagination."""
   cursor: String!
 }
 
@@ -747,33 +468,14 @@ type ProjectSubscriptionPayload {
 }
 
 input ProjectSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [ProjectSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [ProjectSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [ProjectSubscriptionWhereInput!]
-
-  """The subscription event gets dispatched when it's listed in mutation_in"""
   mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
   updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
   updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
   updatedFields_contains_some: [String!]
   node: ProjectWhereInput
+  AND: [ProjectSubscriptionWhereInput!]
+  OR: [ProjectSubscriptionWhereInput!]
+  NOT: [ProjectSubscriptionWhereInput!]
 }
 
 input ProjectUpdateInput {
@@ -787,9 +489,9 @@ input ProjectUpdateManyMutationInput {
 
 input ProjectUpdateOneRequiredWithoutDialogsInput {
   create: ProjectCreateWithoutDialogsInput
-  connect: ProjectWhereUniqueInput
   update: ProjectUpdateWithoutDialogsDataInput
   upsert: ProjectUpsertWithoutDialogsInput
+  connect: ProjectWhereUniqueInput
 }
 
 input ProjectUpdateWithoutDialogsDataInput {
@@ -802,97 +504,40 @@ input ProjectUpsertWithoutDialogsInput {
 }
 
 input ProjectWhereInput {
-  """Logical AND on all given filters."""
-  AND: [ProjectWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [ProjectWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [ProjectWhereInput!]
   id: ID
-
-  """All values that are not equal to given value."""
   id_not: ID
-
-  """All values that are contained in given list."""
   id_in: [ID!]
-
-  """All values that are not contained in given list."""
   id_not_in: [ID!]
-
-  """All values less than the given value."""
   id_lt: ID
-
-  """All values less than or equal the given value."""
   id_lte: ID
-
-  """All values greater than the given value."""
   id_gt: ID
-
-  """All values greater than or equal the given value."""
   id_gte: ID
-
-  """All values containing the given string."""
   id_contains: ID
-
-  """All values not containing the given string."""
   id_not_contains: ID
-
-  """All values starting with the given string."""
   id_starts_with: ID
-
-  """All values not starting with the given string."""
   id_not_starts_with: ID
-
-  """All values ending with the given string."""
   id_ends_with: ID
-
-  """All values not ending with the given string."""
   id_not_ends_with: ID
   name: String
-
-  """All values that are not equal to given value."""
   name_not: String
-
-  """All values that are contained in given list."""
   name_in: [String!]
-
-  """All values that are not contained in given list."""
   name_not_in: [String!]
-
-  """All values less than the given value."""
   name_lt: String
-
-  """All values less than or equal the given value."""
   name_lte: String
-
-  """All values greater than the given value."""
   name_gt: String
-
-  """All values greater than or equal the given value."""
   name_gte: String
-
-  """All values containing the given string."""
   name_contains: String
-
-  """All values not containing the given string."""
   name_not_contains: String
-
-  """All values starting with the given string."""
   name_starts_with: String
-
-  """All values not starting with the given string."""
   name_not_starts_with: String
-
-  """All values ending with the given string."""
   name_ends_with: String
-
-  """All values not ending with the given string."""
   name_not_ends_with: String
   dialogs_every: DialogWhereInput
   dialogs_some: DialogWhereInput
   dialogs_none: DialogWhereInput
+  AND: [ProjectWhereInput!]
+  OR: [ProjectWhereInput!]
+  NOT: [ProjectWhereInput!]
 }
 
 input ProjectWhereUniqueInput {
@@ -901,34 +546,29 @@ input ProjectWhereUniqueInput {
 }
 
 type Query {
-  projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project]!
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
-  dialogs(where: DialogWhereInput, orderBy: DialogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Dialog]!
-  translations(where: TranslationWhereInput, orderBy: TranslationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Translation]!
-  project(where: ProjectWhereUniqueInput!): Project
-  user(where: UserWhereUniqueInput!): User
   dialog(where: DialogWhereUniqueInput!): Dialog
-  translation(where: TranslationWhereUniqueInput!): Translation
-  projectsConnection(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProjectConnection!
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  dialogs(where: DialogWhereInput, orderBy: DialogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Dialog]!
   dialogsConnection(where: DialogWhereInput, orderBy: DialogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DialogConnection!
+  project(where: ProjectWhereUniqueInput!): Project
+  projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project]!
+  projectsConnection(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProjectConnection!
+  translation(where: TranslationWhereUniqueInput!): Translation
+  translations(where: TranslationWhereInput, orderBy: TranslationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Translation]!
   translationsConnection(where: TranslationWhereInput, orderBy: TranslationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TranslationConnection!
-
-  """Fetches an object given its ID"""
-  node(
-    """The ID of an object"""
-    id: ID!
-  ): Node
+  user(where: UserWhereUniqueInput!): User
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  node(id: ID!): Node
 }
 
 type Subscription {
-  project(where: ProjectSubscriptionWhereInput): ProjectSubscriptionPayload
-  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   dialog(where: DialogSubscriptionWhereInput): DialogSubscriptionPayload
+  project(where: ProjectSubscriptionWhereInput): ProjectSubscriptionPayload
   translation(where: TranslationSubscriptionWhereInput): TranslationSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
-type Translation implements Node {
+type Translation {
   id: ID!
   de: String
   en: String
@@ -937,12 +577,8 @@ type Translation implements Node {
   dialog: Dialog!
 }
 
-"""A connection to a list of items."""
 type TranslationConnection {
-  """Information to aid in pagination."""
   pageInfo: PageInfo!
-
-  """A list of edges."""
   edges: [TranslationEdge]!
   aggregate: AggregateTranslation!
 }
@@ -969,12 +605,8 @@ input TranslationCreateWithoutDialogInput {
   pl: String
 }
 
-"""An edge in a connection."""
 type TranslationEdge {
-  """The item at the end of the edge."""
   node: Translation!
-
-  """A cursor for use in pagination."""
   cursor: String!
 }
 
@@ -1007,33 +639,14 @@ type TranslationSubscriptionPayload {
 }
 
 input TranslationSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [TranslationSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [TranslationSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [TranslationSubscriptionWhereInput!]
-
-  """The subscription event gets dispatched when it's listed in mutation_in"""
   mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
   updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
   updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
   updatedFields_contains_some: [String!]
   node: TranslationWhereInput
+  AND: [TranslationSubscriptionWhereInput!]
+  OR: [TranslationSubscriptionWhereInput!]
+  NOT: [TranslationSubscriptionWhereInput!]
 }
 
 input TranslationUpdateInput {
@@ -1053,11 +666,11 @@ input TranslationUpdateManyMutationInput {
 
 input TranslationUpdateOneWithoutDialogInput {
   create: TranslationCreateWithoutDialogInput
-  connect: TranslationWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
   update: TranslationUpdateWithoutDialogDataInput
   upsert: TranslationUpsertWithoutDialogInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: TranslationWhereUniqueInput
 }
 
 input TranslationUpdateWithoutDialogDataInput {
@@ -1073,222 +686,87 @@ input TranslationUpsertWithoutDialogInput {
 }
 
 input TranslationWhereInput {
-  """Logical AND on all given filters."""
-  AND: [TranslationWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [TranslationWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [TranslationWhereInput!]
   id: ID
-
-  """All values that are not equal to given value."""
   id_not: ID
-
-  """All values that are contained in given list."""
   id_in: [ID!]
-
-  """All values that are not contained in given list."""
   id_not_in: [ID!]
-
-  """All values less than the given value."""
   id_lt: ID
-
-  """All values less than or equal the given value."""
   id_lte: ID
-
-  """All values greater than the given value."""
   id_gt: ID
-
-  """All values greater than or equal the given value."""
   id_gte: ID
-
-  """All values containing the given string."""
   id_contains: ID
-
-  """All values not containing the given string."""
   id_not_contains: ID
-
-  """All values starting with the given string."""
   id_starts_with: ID
-
-  """All values not starting with the given string."""
   id_not_starts_with: ID
-
-  """All values ending with the given string."""
   id_ends_with: ID
-
-  """All values not ending with the given string."""
   id_not_ends_with: ID
   de: String
-
-  """All values that are not equal to given value."""
   de_not: String
-
-  """All values that are contained in given list."""
   de_in: [String!]
-
-  """All values that are not contained in given list."""
   de_not_in: [String!]
-
-  """All values less than the given value."""
   de_lt: String
-
-  """All values less than or equal the given value."""
   de_lte: String
-
-  """All values greater than the given value."""
   de_gt: String
-
-  """All values greater than or equal the given value."""
   de_gte: String
-
-  """All values containing the given string."""
   de_contains: String
-
-  """All values not containing the given string."""
   de_not_contains: String
-
-  """All values starting with the given string."""
   de_starts_with: String
-
-  """All values not starting with the given string."""
   de_not_starts_with: String
-
-  """All values ending with the given string."""
   de_ends_with: String
-
-  """All values not ending with the given string."""
   de_not_ends_with: String
   en: String
-
-  """All values that are not equal to given value."""
   en_not: String
-
-  """All values that are contained in given list."""
   en_in: [String!]
-
-  """All values that are not contained in given list."""
   en_not_in: [String!]
-
-  """All values less than the given value."""
   en_lt: String
-
-  """All values less than or equal the given value."""
   en_lte: String
-
-  """All values greater than the given value."""
   en_gt: String
-
-  """All values greater than or equal the given value."""
   en_gte: String
-
-  """All values containing the given string."""
   en_contains: String
-
-  """All values not containing the given string."""
   en_not_contains: String
-
-  """All values starting with the given string."""
   en_starts_with: String
-
-  """All values not starting with the given string."""
   en_not_starts_with: String
-
-  """All values ending with the given string."""
   en_ends_with: String
-
-  """All values not ending with the given string."""
   en_not_ends_with: String
   ru: String
-
-  """All values that are not equal to given value."""
   ru_not: String
-
-  """All values that are contained in given list."""
   ru_in: [String!]
-
-  """All values that are not contained in given list."""
   ru_not_in: [String!]
-
-  """All values less than the given value."""
   ru_lt: String
-
-  """All values less than or equal the given value."""
   ru_lte: String
-
-  """All values greater than the given value."""
   ru_gt: String
-
-  """All values greater than or equal the given value."""
   ru_gte: String
-
-  """All values containing the given string."""
   ru_contains: String
-
-  """All values not containing the given string."""
   ru_not_contains: String
-
-  """All values starting with the given string."""
   ru_starts_with: String
-
-  """All values not starting with the given string."""
   ru_not_starts_with: String
-
-  """All values ending with the given string."""
   ru_ends_with: String
-
-  """All values not ending with the given string."""
   ru_not_ends_with: String
   pl: String
-
-  """All values that are not equal to given value."""
   pl_not: String
-
-  """All values that are contained in given list."""
   pl_in: [String!]
-
-  """All values that are not contained in given list."""
   pl_not_in: [String!]
-
-  """All values less than the given value."""
   pl_lt: String
-
-  """All values less than or equal the given value."""
   pl_lte: String
-
-  """All values greater than the given value."""
   pl_gt: String
-
-  """All values greater than or equal the given value."""
   pl_gte: String
-
-  """All values containing the given string."""
   pl_contains: String
-
-  """All values not containing the given string."""
   pl_not_contains: String
-
-  """All values starting with the given string."""
   pl_starts_with: String
-
-  """All values not starting with the given string."""
   pl_not_starts_with: String
-
-  """All values ending with the given string."""
   pl_ends_with: String
-
-  """All values not ending with the given string."""
   pl_not_ends_with: String
   dialog: DialogWhereInput
+  AND: [TranslationWhereInput!]
+  OR: [TranslationWhereInput!]
+  NOT: [TranslationWhereInput!]
 }
 
 input TranslationWhereUniqueInput {
   id: ID
 }
 
-type User implements Node {
+type User {
   id: ID!
   name: String!
   email: String!
@@ -1297,12 +775,8 @@ type User implements Node {
   dialogs(where: DialogWhereInput, orderBy: DialogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Dialog!]
 }
 
-"""A connection to a list of items."""
 type UserConnection {
-  """Information to aid in pagination."""
   pageInfo: PageInfo!
-
-  """A list of edges."""
   edges: [UserEdge]!
   aggregate: AggregateUser!
 }
@@ -1333,12 +807,8 @@ input UserCreateWithoutDialogsInput {
   permissions: UserCreatepermissionsInput
 }
 
-"""An edge in a connection."""
 type UserEdge {
-  """The item at the end of the edge."""
   node: User!
-
-  """A cursor for use in pagination."""
   cursor: String!
 }
 
@@ -1362,174 +832,65 @@ type UserPreviousValues {
 }
 
 input UserScalarWhereInput {
-  """Logical AND on all given filters."""
-  AND: [UserScalarWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [UserScalarWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [UserScalarWhereInput!]
   id: ID
-
-  """All values that are not equal to given value."""
   id_not: ID
-
-  """All values that are contained in given list."""
   id_in: [ID!]
-
-  """All values that are not contained in given list."""
   id_not_in: [ID!]
-
-  """All values less than the given value."""
   id_lt: ID
-
-  """All values less than or equal the given value."""
   id_lte: ID
-
-  """All values greater than the given value."""
   id_gt: ID
-
-  """All values greater than or equal the given value."""
   id_gte: ID
-
-  """All values containing the given string."""
   id_contains: ID
-
-  """All values not containing the given string."""
   id_not_contains: ID
-
-  """All values starting with the given string."""
   id_starts_with: ID
-
-  """All values not starting with the given string."""
   id_not_starts_with: ID
-
-  """All values ending with the given string."""
   id_ends_with: ID
-
-  """All values not ending with the given string."""
   id_not_ends_with: ID
   name: String
-
-  """All values that are not equal to given value."""
   name_not: String
-
-  """All values that are contained in given list."""
   name_in: [String!]
-
-  """All values that are not contained in given list."""
   name_not_in: [String!]
-
-  """All values less than the given value."""
   name_lt: String
-
-  """All values less than or equal the given value."""
   name_lte: String
-
-  """All values greater than the given value."""
   name_gt: String
-
-  """All values greater than or equal the given value."""
   name_gte: String
-
-  """All values containing the given string."""
   name_contains: String
-
-  """All values not containing the given string."""
   name_not_contains: String
-
-  """All values starting with the given string."""
   name_starts_with: String
-
-  """All values not starting with the given string."""
   name_not_starts_with: String
-
-  """All values ending with the given string."""
   name_ends_with: String
-
-  """All values not ending with the given string."""
   name_not_ends_with: String
   email: String
-
-  """All values that are not equal to given value."""
   email_not: String
-
-  """All values that are contained in given list."""
   email_in: [String!]
-
-  """All values that are not contained in given list."""
   email_not_in: [String!]
-
-  """All values less than the given value."""
   email_lt: String
-
-  """All values less than or equal the given value."""
   email_lte: String
-
-  """All values greater than the given value."""
   email_gt: String
-
-  """All values greater than or equal the given value."""
   email_gte: String
-
-  """All values containing the given string."""
   email_contains: String
-
-  """All values not containing the given string."""
   email_not_contains: String
-
-  """All values starting with the given string."""
   email_starts_with: String
-
-  """All values not starting with the given string."""
   email_not_starts_with: String
-
-  """All values ending with the given string."""
   email_ends_with: String
-
-  """All values not ending with the given string."""
   email_not_ends_with: String
   password: String
-
-  """All values that are not equal to given value."""
   password_not: String
-
-  """All values that are contained in given list."""
   password_in: [String!]
-
-  """All values that are not contained in given list."""
   password_not_in: [String!]
-
-  """All values less than the given value."""
   password_lt: String
-
-  """All values less than or equal the given value."""
   password_lte: String
-
-  """All values greater than the given value."""
   password_gt: String
-
-  """All values greater than or equal the given value."""
   password_gte: String
-
-  """All values containing the given string."""
   password_contains: String
-
-  """All values not containing the given string."""
   password_not_contains: String
-
-  """All values starting with the given string."""
   password_starts_with: String
-
-  """All values not starting with the given string."""
   password_not_starts_with: String
-
-  """All values ending with the given string."""
   password_ends_with: String
-
-  """All values not ending with the given string."""
   password_not_ends_with: String
+  AND: [UserScalarWhereInput!]
+  OR: [UserScalarWhereInput!]
+  NOT: [UserScalarWhereInput!]
 }
 
 type UserSubscriptionPayload {
@@ -1540,33 +901,14 @@ type UserSubscriptionPayload {
 }
 
 input UserSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [UserSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [UserSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [UserSubscriptionWhereInput!]
-
-  """The subscription event gets dispatched when it's listed in mutation_in"""
   mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
   updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
   updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
   updatedFields_contains_some: [String!]
   node: UserWhereInput
+  AND: [UserSubscriptionWhereInput!]
+  OR: [UserSubscriptionWhereInput!]
+  NOT: [UserSubscriptionWhereInput!]
 }
 
 input UserUpdateInput {
@@ -1593,14 +935,14 @@ input UserUpdateManyMutationInput {
 
 input UserUpdateManyWithoutDialogsInput {
   create: [UserCreateWithoutDialogsInput!]
+  delete: [UserWhereUniqueInput!]
   connect: [UserWhereUniqueInput!]
   set: [UserWhereUniqueInput!]
   disconnect: [UserWhereUniqueInput!]
-  delete: [UserWhereUniqueInput!]
   update: [UserUpdateWithWhereUniqueWithoutDialogsInput!]
-  updateMany: [UserUpdateManyWithWhereNestedInput!]
-  deleteMany: [UserScalarWhereInput!]
   upsert: [UserUpsertWithWhereUniqueWithoutDialogsInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
 }
 
 input UserUpdateManyWithWhereNestedInput {
@@ -1631,177 +973,68 @@ input UserUpsertWithWhereUniqueWithoutDialogsInput {
 }
 
 input UserWhereInput {
-  """Logical AND on all given filters."""
-  AND: [UserWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [UserWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [UserWhereInput!]
   id: ID
-
-  """All values that are not equal to given value."""
   id_not: ID
-
-  """All values that are contained in given list."""
   id_in: [ID!]
-
-  """All values that are not contained in given list."""
   id_not_in: [ID!]
-
-  """All values less than the given value."""
   id_lt: ID
-
-  """All values less than or equal the given value."""
   id_lte: ID
-
-  """All values greater than the given value."""
   id_gt: ID
-
-  """All values greater than or equal the given value."""
   id_gte: ID
-
-  """All values containing the given string."""
   id_contains: ID
-
-  """All values not containing the given string."""
   id_not_contains: ID
-
-  """All values starting with the given string."""
   id_starts_with: ID
-
-  """All values not starting with the given string."""
   id_not_starts_with: ID
-
-  """All values ending with the given string."""
   id_ends_with: ID
-
-  """All values not ending with the given string."""
   id_not_ends_with: ID
   name: String
-
-  """All values that are not equal to given value."""
   name_not: String
-
-  """All values that are contained in given list."""
   name_in: [String!]
-
-  """All values that are not contained in given list."""
   name_not_in: [String!]
-
-  """All values less than the given value."""
   name_lt: String
-
-  """All values less than or equal the given value."""
   name_lte: String
-
-  """All values greater than the given value."""
   name_gt: String
-
-  """All values greater than or equal the given value."""
   name_gte: String
-
-  """All values containing the given string."""
   name_contains: String
-
-  """All values not containing the given string."""
   name_not_contains: String
-
-  """All values starting with the given string."""
   name_starts_with: String
-
-  """All values not starting with the given string."""
   name_not_starts_with: String
-
-  """All values ending with the given string."""
   name_ends_with: String
-
-  """All values not ending with the given string."""
   name_not_ends_with: String
   email: String
-
-  """All values that are not equal to given value."""
   email_not: String
-
-  """All values that are contained in given list."""
   email_in: [String!]
-
-  """All values that are not contained in given list."""
   email_not_in: [String!]
-
-  """All values less than the given value."""
   email_lt: String
-
-  """All values less than or equal the given value."""
   email_lte: String
-
-  """All values greater than the given value."""
   email_gt: String
-
-  """All values greater than or equal the given value."""
   email_gte: String
-
-  """All values containing the given string."""
   email_contains: String
-
-  """All values not containing the given string."""
   email_not_contains: String
-
-  """All values starting with the given string."""
   email_starts_with: String
-
-  """All values not starting with the given string."""
   email_not_starts_with: String
-
-  """All values ending with the given string."""
   email_ends_with: String
-
-  """All values not ending with the given string."""
   email_not_ends_with: String
   password: String
-
-  """All values that are not equal to given value."""
   password_not: String
-
-  """All values that are contained in given list."""
   password_in: [String!]
-
-  """All values that are not contained in given list."""
   password_not_in: [String!]
-
-  """All values less than the given value."""
   password_lt: String
-
-  """All values less than or equal the given value."""
   password_lte: String
-
-  """All values greater than the given value."""
   password_gt: String
-
-  """All values greater than or equal the given value."""
   password_gte: String
-
-  """All values containing the given string."""
   password_contains: String
-
-  """All values not containing the given string."""
   password_not_contains: String
-
-  """All values starting with the given string."""
   password_starts_with: String
-
-  """All values not starting with the given string."""
   password_not_starts_with: String
-
-  """All values ending with the given string."""
   password_ends_with: String
-
-  """All values not ending with the given string."""
   password_not_ends_with: String
   dialogs_every: DialogWhereInput
   dialogs_some: DialogWhereInput
   dialogs_none: DialogWhereInput
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
 }
 
 input UserWhereUniqueInput {
